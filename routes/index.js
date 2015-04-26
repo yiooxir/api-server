@@ -1,23 +1,22 @@
 
 var url = require('url');
-//var setUrl = require('setCurrentUrl');
+var Dba = require('../api/Dba');
 
 module.exports = function(app) {
 
+  var dba = new Dba(app);
 
-  //var collection = url.parse(app.get('CURRENT_URL')).pathname;
-
-  app.get('/', function(req, res) {
-    //console.log('current collection >>', collection);
-    console.log('get');
-    res.end('OK')
-  });
-
-  app.get('/:collection/:spec', function(req, res) {
-
-    console.log('ggggggg', req.params.collection);
-    res.end('get user');
-  });
-
-
+  app.post('api/projects', dba.projectCreate);
+  //app.update('api/project/:id', dba.projectUpdate);
+  //
+  //app.get('api/:firm/users', dba.usersQuery);
+  //app.get('api/:firm/users/:id', dba.userGet);
+  //app.post('api/:firm/users/:id', dba.userCreate);
+  //app.update('api/:firm/users/:id', dba.userUpdate);
+  //app.delete('api/:firm/users/:id', dba.userDelete);
+  //
+  //app.get('/api/:firm/:collection', dba.objectsQuery);
+  //app.post('/api/:firm/:collection/:id', dba.objectsGet);
+  //app.update('/api/:firm/:collection/:id', dba.objectsUpdate);
+  //app.delete('/api/:firm/:collection/:id', dba.objectsDelete);
 };

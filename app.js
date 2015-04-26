@@ -38,21 +38,13 @@ app.use(session({
 
 
 function setCurrentUrl(req, res, next) {
-  //console.log('>>')
   app.set('CURRENT_URL', req.protocol + '://' + req.get('host') + req.originalUrl);
-
-  app.set('COLLECTION')
-  //res.locals = {};
-  //res.locals.collection = req.originalUrl.splice(1, req.originalUrl.length-1);
-  //app.set('COLLECTION', res.locals.collection);
-  //console.log(app.get('CURRENT_URL'));
   next();
 }
 
 app.use(setCurrentUrl);
 
 routes(app);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
