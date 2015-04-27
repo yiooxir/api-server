@@ -1,8 +1,14 @@
 {
-  "port": 3010,
-  "mongoose": {
-    "uri" : "mongodb://localhost/api",
+  "server": {
+    "host": "localhost",
+    "port": 3010
+  },
+
+  "database": {
+    "uri" : "mongodb://dogen.mongohq.com:10037/issue-traker",
     "options": {
+      "user": "root",
+      "pass": "taskerperetasker",
       "server" : {
         "socketOptions": {
           "keepAlive": 1
@@ -10,6 +16,7 @@
       }
     }
   },
+
   "session": {
     "secret": "mhNdfgdftdW2",
     "key": "sid",
