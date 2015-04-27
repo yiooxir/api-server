@@ -15,8 +15,8 @@ var routes = require('./routes');
 var app = express();
 
 // view engine setup
-//app.set('views', path.join(__dirname, 'views'));
-//app.set('view engine', 'jade');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -36,15 +36,13 @@ app.use(session({
 }));
 
 
+var currentUser = require('./middleware/currentUserInit');
+var projectRoute = require('./routes/project');
 
-function setCurrentUrl(req, res, next) {
-  app.set('CURRENT_URL', req.protocol + '://' + req.get('host') + req.originalUrl);
-  next();
-}
+app.use(currentUser);
+app.use('/api/:project', projectRoute);
 
-app.use(setCurrentUrl);
-
-routes(app);
+//routes(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -60,7 +58,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
+    res.json({
       message: err.message,
       error: err
     });

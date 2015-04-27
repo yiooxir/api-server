@@ -1,6 +1,6 @@
 
 var url = require('url');
-var Dba = require('../api/Dba');
+var dba = require('../api/dba');
 
 module.exports = function(app) {
 
