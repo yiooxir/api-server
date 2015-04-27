@@ -5,10 +5,10 @@
   },
 
   "database": {
-    "uri" : "mongodb://dogen.mongohq.com:10037/issue-traker",
+    "uri" : "mongodb://localhost:1000",
     "options": {
       "user": "root",
-      "pass": "taskerperetasker",
+      "pass": "",
       "server" : {
         "socketOptions": {
           "keepAlive": 1
