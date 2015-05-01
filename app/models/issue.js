@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var Team = new Schema({
     id:           { type: Number, required: true  },
     name:         { type: String, required: true  },
-    description:  { type: String, required: false },
+    description:  { type: String, required: false }
 });
 
 module.exports = mongoose.model('Team', Team);

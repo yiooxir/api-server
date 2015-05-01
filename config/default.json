@@ -5,9 +5,9 @@
   },
 
   "database": {
-    "uri" : "mongodb://localhost:1000",
+    "uri" : "mongodb://localhost/rozello",
     "options": {
-      "user": "root",
+      "user": "",
       "pass": "",
       "server" : {
         "socketOptions": {

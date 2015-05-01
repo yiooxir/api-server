@@ -1,7 +1,7 @@
 var crypto = require('crypto');
 var async = require('async');
 var util = require('util');
-var mongoose = require('../lib/mongoose');
+var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var User = new Schema({
@@ -54,7 +54,6 @@ User.virtual('password')
 User.methods.checkPassword = function(password) {
     return this.encryptPassword(password) === this.hashedPassword;
 };
-
 
 User.statics.authorize = function(username, password, callback) {
     var User = this;

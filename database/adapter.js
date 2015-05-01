@@ -24,6 +24,7 @@ function Database() {
 	    console.log('[DB]: Connection error: ' + err.message);
 	});
 
+
 	db.once('open', function() {
 	    console.log('[DB]: Connected to DB!');
 	});
