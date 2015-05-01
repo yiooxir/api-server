@@ -1,12 +1,10 @@
 var crypto = require('crypto');
 var async = require('async');
 var util = require('util');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-
-var mongoose = require('../lib/mongoose'),
-    Schema = mongoose.Schema;
-
-var schema = new Schema({
+var User = new Schema({
     username: {
         type: String,
         unique: true,
@@ -31,7 +29,7 @@ var schema = new Schema({
     }
 });
 
-schema.methods.toJSON = function() {
+User.methods.toJSON = function() {
     var obj = this.toObject();
     delete obj.hashedPassword;
     delete obj.salt;
@@ -39,12 +37,12 @@ schema.methods.toJSON = function() {
 };
 
 
-schema.methods.encryptPassword = function(password) {
+User.methods.encryptPassword = function(password) {
     return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
 };
 
 
-schema.virtual('password')
+User.virtual('password')
     .set(function(password) {
         this._plainPassword = password;
         this.salt = Math.random() + '';
@@ -53,12 +51,11 @@ schema.virtual('password')
     .get(function() { return this._plainPassword; });
 
 
-schema.methods.checkPassword = function(password) {
+User.methods.checkPassword = function(password) {
     return this.encryptPassword(password) === this.hashedPassword;
 };
 
-
-schema.statics.authorize = function(username, password, callback) {
+User.statics.authorize = function(username, password, callback) {
     var User = this;
 
     async.waterfall([
@@ -75,3 +72,6 @@ schema.statics.authorize = function(username, password, callback) {
         }
     ], callback);
 };
+
+module.exports = mongoose.model('User', User);
+
