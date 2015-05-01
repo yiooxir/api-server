@@ -1,10 +1,14 @@
 var Team = require('../models/team');
 
 exports.get = function(req, res) {
-	
-}
+	res.json('team object');
+};
 
-exports.create = function(req, res) {
+exports.query = function(req, res, next) {
+	res.json('teams list');
+};
+
+exports.create = function(req, res, next) {
 	var data = req.body;
 
 	var team = new Team({
@@ -19,4 +23,13 @@ exports.create = function(req, res) {
 		}
 		res.send(team.toJSON());
 	})
-}
+};
+
+
+exports.update = function(req, res, next) {
+
+};
+
+exports.delete = function(req, res, next) {
+
+};
