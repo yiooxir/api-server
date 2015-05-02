@@ -24,6 +24,13 @@ see: https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%BA%D
 
 exports.HttpError = HttpError;
 
+/* 400 Bad Request */
+
+exports.badRequest = function(message) {
+    return new HttpError(400, 'badRequest', message || "badRequest");
+};
+
+
 
 /* 401 Unauthorized error
 * ----------------------*/

@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 // Team schema
 var Team = new Schema({
-	name: 		  { type: String, required: true  },
+	name: 		  { type: String, required: true, unique: true  },
 	description:  { type: String, required: false }
 });
 

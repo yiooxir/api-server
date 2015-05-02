@@ -3,6 +3,7 @@ var async = require('async');
 var util = require('util');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var errors = require('../../errors');
 
 var User = new Schema({
     username: {
@@ -36,14 +37,11 @@ User.methods.toJSON = function() {
     return obj;
 };
 
-
-User.methods.encryptPassword = function(password) {
-    return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
-};
-
-
 User.virtual('password')
     .set(function(password) {
+        console.log(errors);
+        if (!password) return errors.badRequest('empty password');
+
         this._plainPassword = password;
         this.salt = Math.random() + '';
         this.hashedPassword = this.encryptPassword(password);
@@ -51,9 +49,15 @@ User.virtual('password')
     .get(function() { return this._plainPassword; });
 
 
+User.methods.encryptPassword = function(password) {
+    return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
+};
+
+
 User.methods.checkPassword = function(password) {
     return this.encryptPassword(password) === this.hashedPassword;
 };
+
 
 User.statics.authorize = function(username, password, callback) {
     var User = this;
@@ -72,6 +76,16 @@ User.statics.authorize = function(username, password, callback) {
         }
     ], callback);
 };
+
+
+User.static.create = function(username, password, callback) {
+
+};
+
+User.static.update = function(values, callback) {
+
+};
+
 
 module.exports = mongoose.model('User', User);
 
