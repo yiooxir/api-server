@@ -17,6 +17,12 @@
     }
   },
 
+  "logger": {
+    "level": "",
+    "path": "/../logs",
+    "filename": "app.log"
+  },
+
   "session": {
     "secret": "mhNdfgdftdW2",
     "key": "sid",
