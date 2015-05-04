@@ -13,13 +13,13 @@ describe('team model', function() {
         });
     });
 
-    describe('should create a new team', function() {
+    describe('#create()', function() {
         var team = new Team({
             name: 'testName',
             descriptions: ''
         });
 
-        it('should ok', function(done) {
+        it('should create new team', function(done) {
             team.save(function(err, team) {
                 team.should.have.property('name', 'testName');
                 done();
