@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var BaseSchema = require('./abstractEntity');
 extend = require('mongoose-schema-extend');
-var Schema = mongoose.Schema;
 
 /**
  * @class Team
