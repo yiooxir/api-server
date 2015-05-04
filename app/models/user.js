@@ -6,6 +6,7 @@ var Schema = mongoose.Schema;
 var errors = require('../../errors');
 var Team = require('./team');
 var _ = require('underscore');
+var logger = require('../../utils/logger');
 
 /**
  * @description
@@ -183,7 +184,25 @@ User.methods.shareTeam = function(config, callback) {
     ], callback)
 };
 
-User.statics.deleteFromTeam = function() {};
+User.methods.unshareTeam = function(teamId, callback) {
+    var self = this;
+
+    if (teamId instanceof mongoose.Types.ObjectId) teamId = teamId.toString();
+
+    var i = _.findIndex(self.teams, {teamId: teamId});
+
+    if (i == -1) {
+        logger.warn('the requested command is not found in the list of shared teams');
+        return callback(null, self.teams);
+    }
+
+    self.teams.splice(i, 1);
+
+    self.save(function(err, res) {
+        if (err) return callback(err);
+        return callback(null, self.teams);
+    })
+};
 
 User.statics.addRights = function() {};
 
