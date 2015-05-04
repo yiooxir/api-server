@@ -184,6 +184,21 @@ User.methods.shareTeam = function(config, callback) {
     ], callback)
 };
 
+/**
+ * @async
+ * @method unshareTeam
+ * @description
+ * Unshare team for current user.
+ * Attribute **teamId** may be string or object instantiated from mongo ObjectID
+ *
+ * If requested teamId will be not found in shared teams, it not throw the error, but logger send warn message.
+ *
+ * Callback get attributes: *err, res*, then *res* is all shared teams of current user.
+ *
+ * @param teamId {string | object}
+ * @param callback
+ * @returns {*}
+ */
 User.methods.unshareTeam = function(teamId, callback) {
     var self = this;
 
