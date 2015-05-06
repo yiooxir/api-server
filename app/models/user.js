@@ -219,7 +219,15 @@ User.methods.unshareTeam = function(teamId, callback) {
     })
 };
 
-User.statics.addRights = function() {};
+/* [{entity: '_title', id: '....', rights: '1111' }] */
+User.statics.getRights = function(object, callback) {
+    var self = this;
+    var objectId = object._id.toString();
+
+    var right = _.findWhere(self.rights, {entity: object._title, id: objectId});
+
+    return callback(null, right ? right.rights : '0000');
+};
 
 User.statics.deleteRights = function() {};
 
