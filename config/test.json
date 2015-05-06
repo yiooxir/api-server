@@ -1,0 +1,29 @@
+{
+    "server": {
+        "host": "localhost",
+        "port": 3010
+    },
+
+    "database": {
+        "uri" : "mongodb://localhost/rozello_test",
+        "options": {
+            "user": "",
+            "pass": "",
+            "server" : {
+                "socketOptions": {
+                    "keepAlive": 1
+                }
+            }
+        }
+    },
+
+    "session": {
+        "secret": "mhNdfgdftdW2",
+        "key": "sid",
+        "cookie": {
+            "path": "/",
+            "httpOnly": true,
+            "maxAge": null
+        }
+    }
+}
