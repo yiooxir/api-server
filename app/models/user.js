@@ -197,7 +197,6 @@ User.methods.shareTeam = function(config, callback) {
  *
  * @param teamId {string | object}
  * @param callback
- * @returns {*}
  */
 User.methods.unshareTeam = function(teamId, callback) {
     var self = this;
