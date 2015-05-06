@@ -17,12 +17,17 @@
     "serve-favicon": "~2.2.0",
     "should": "^6.0.1",
     "stylus": "0.42.3",
-    "winston": "^1.0.0"
+    "winston": "^1.0.0",
+    "gulp": "^3.8.11",
+    "gulp-yuidoc": "^0.1.2",
+    "underscore": "^1.8.3",
+    "mongoose-schema-extend": "^0.1.7"
   },
   "devDependencies": {
     "express-session": "^1.10.4",
     "config": "^1.12.0",
     "mongoose": "^4.0.1",
-    "connect-mongostore": "^0.1.4"
+    "connect-mongostore": "^0.1.4",
+    "gulp-yuidoc": "^0.1.2"
   }
 }
