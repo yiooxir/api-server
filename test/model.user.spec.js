@@ -119,6 +119,15 @@ describe('User model', function() {
             })
         });
 
+        describe('#unshareTeam()', function() {
+            it('should remove team from shared teams (user.teams)', function(done) {
+                user.unshareTeam(team2._id, function(err, res) {
+                    user.teams.length.should.be.equal(1);
+                    done();
+                })
+            })
+        })
+
     })
 });
 

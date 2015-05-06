@@ -6,6 +6,7 @@ var Schema = mongoose.Schema;
 var errors = require('../../errors');
 var Team = require('./team');
 var _ = require('underscore');
+var logger = require('../../utils/logger');
 
 /**
  * @description
@@ -183,7 +184,40 @@ User.methods.shareTeam = function(config, callback) {
     ], callback)
 };
 
-User.statics.deleteFromTeam = function() {};
+/**
+ * @async
+ * @method unshareTeam
+ * @description
+ * Unshare team for current user.
+ * Attribute **teamId** may be string or object instantiated from mongo ObjectID
+ *
+ * If requested teamId will be not found in shared teams, it not throw the error, but logger send warn message.
+ *
+ * Callback get attributes: *err, res*, then *res* is all shared teams of current user.
+ *
+ * @param teamId {string | object}
+ * @param callback
+ * @returns {*}
+ */
+User.methods.unshareTeam = function(teamId, callback) {
+    var self = this;
+
+    if (teamId instanceof mongoose.Types.ObjectId) teamId = teamId.toString();
+
+    var i = _.findIndex(self.teams, {teamId: teamId});
+
+    if (i == -1) {
+        logger.warn('the requested command is not found in the list of shared teams');
+        return callback(null, self.teams);
+    }
+
+    self.teams.splice(i, 1);
+
+    self.save(function(err, res) {
+        if (err) return callback(err);
+        return callback(null, self.teams);
+    })
+};
 
 User.statics.addRights = function() {};
 
