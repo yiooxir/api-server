@@ -9,18 +9,22 @@ Secure.prototype = {
     /**
      * @method
      * @description
-     * return right for current user on the specified team
+     * return rights for current user on the specified team
      *
      * @param user {object | id } user object
-     * @optional
      * @param team { object | string }
      */
-    getTeamRights: function(user, team) {
-        user = arguments.length == 1 ? this.user : user;
+    isSuperuser: function(user, team) {
         return _.findIndex(user.teams, {teamId: team});
 
     },
-    getObjectRights: function(object) {
+    getTeamName: function(user, team) {
+
+    },
+    getObjectRights: function(user, object) {
+
+    },
+    getAllowedIds: function(team, user, parentCollectionName) {
 
     },
     checkObjectRights: function(object, type) {
