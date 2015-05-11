@@ -158,11 +158,11 @@ User.methods.shareTeam = function(config, callback) {
 
     _.extend(conf, config);
 
-    if (!config.hasOwnProperty('teamId')) callback(new Error('team ID is undefined'));
+    if (!config.hasOwnProperty('teamId')) return callback(new Error('team ID is undefined'));
 
     if (config.teamId instanceof mongoose.Types.ObjectId) conf.teamId = config.teamId.toString();
 
-    if (!mongoose.Types.ObjectId.isValid(conf.teamId)) callback(new Error('team ID is not valid'));
+    if (!mongoose.Types.ObjectId.isValid(conf.teamId)) return callback(new Error('team ID is not valid'));
 
     async.waterfall([
         function(callback) {
@@ -179,7 +179,7 @@ User.methods.shareTeam = function(config, callback) {
             self.save(callback);
         },
         function(a,b, callback){
-            callback(conf);
+            callback(null, conf);
         }
     ], callback)
 };

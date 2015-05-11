@@ -9,7 +9,8 @@ var entity = mongoose.Schema({
         _createdOn: {type: Date, default: new Date().getTime()},
         _updatedOn: {type: Date, default: new Date().getTime()},
         _rights: {type: Array},
-        _teams: {type: Array}
+        _teams: {type: Array},
+        _parent: {type: Object}
     },
     {
         discriminatorKey : '_title'
