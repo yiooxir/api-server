@@ -3,9 +3,7 @@ var _ = require('underscore');
 var mongoose = require('mongoose');
 var toId = require('../utils').toId;
 
-function LowApi() {
-    this.locals = locals;
-}
+function LowApi() {}
 
 LowApi.prototype = {
 
@@ -27,6 +25,15 @@ LowApi.prototype = {
         });
     },
 
+    _objectRules: function(user, object, callback) {
+        try {
+            var e = _.where(user.rights, {entity: object._title});
+        } catch (err) {
+            return callback(err);
+        }
+        callback(null, e);
+    },
+
     isSuperuser: function(user, team, callback) {
         this._getTeamOptions(user, team, function(err, team) {
             if (err) return callback(err);
@@ -39,15 +46,6 @@ LowApi.prototype = {
             if (err) return callback(err);
             callback(null, team ? team.username : undefined);
         });
-    },
-
-    _objectRules: function(user, object, callback) {
-        try {
-            var e = _.where(user.rights, {entity: object._title});
-        } catch (err) {
-            return callback(err);
-        }
-        callback(null, e);
     },
 
     getObjectRights: function(user, object, callback) {
@@ -70,6 +68,10 @@ LowApi.prototype = {
             if (err) return callback(err);
             callback(null, res[type]);
         })
+    },
+
+    checkCreateRights: function(user, object) {
+
     },
 
     convertToDbQuery: function(values, callback) {

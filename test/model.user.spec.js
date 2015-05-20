@@ -125,7 +125,16 @@ describe('User model', function() {
                     done();
                 })
             })
-        })
+        });
+
+/*--------------------------------*/
+        it('username is unique. should raise the error', function(done) {
+            //user = new User({username: '',password: '123456'});
+            new User({username: 'testName3',password: '123456'}).save(function(err, user) {
+                console.log('>>',user.password, user.rules)
+                done()
+            })
+        });
 
     })
 });

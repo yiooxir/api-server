@@ -66,6 +66,23 @@ User.virtual('password')
     .get(function() { return this._plainPassword; });
 
 
+User.virtual('rules')
+    .set(function(rule) {
+        console.log('aaaaaaaaaaaaaaaaaaaa');
+        this.rights.push(rule)
+        this._a = 10
+    })
+    .get(function() {
+
+        return this._a
+    });
+
+
+User.pre('save', function(next){
+    console.log('111111111111111111Constructor called...')
+    next()
+});
+
 User.methods.encryptPassword = function(password) {
     return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
 };
@@ -227,8 +244,6 @@ User.statics.getRights = function(object, callback) {
 
     return callback(null, right ? right.rights : '0000');
 };
-
-User.statics.deleteRights = function() {};
 
 module.exports = mongoose.model('User', User);
 

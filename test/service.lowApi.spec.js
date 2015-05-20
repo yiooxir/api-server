@@ -162,8 +162,8 @@ describe('low API', function() {
 
         it('should has rights', function(done) {
            lApi.getObjectRights(mock.user1, mock.issue1, function(err, res) {
-               if (err) console.log(err);
-               console.log(111111111, res);
+               if (err) console.error(err);
+               //console.log(111111111, res);
                done()
            })
         })
