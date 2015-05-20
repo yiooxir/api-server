@@ -2,18 +2,27 @@
  * Created by sergey on 19.05.15.
  */
 
-function Permissions() {}
+function Rights() {}
 
-Permissions.prototype = {
-    expand: function(n) {},
-    getRights: function(user, object) {},
-    isPermitted: function(user, object) {},
-    makeQparams: function(params) {},
-    makeQrights: function(rules, entity) {}
+Rights.prototype = {
+    _expand: function(n) {
+        /* расширить цифру прав на хэш правил
+        * вместо цифры дает расшифровку {read: true, write: true ... }*/
+    },
+    get: function(user, object, callback) {
+        /* получить все права на объект. */
+    },
+    permitted: function(user, object, type, callback) {
+        /* проверить права на объект по указнному типу запроса. */
+    },
+    toQuery: function(user, entity) {
+        /* перевести правила пользователя на указанные объекты в запрос к бд */
+    }
+};
 
-    /*User.permissions[{ entity: project, field: _parent, value: 123 }]
-    *
-    * issues   User.permissions[{entity: 'issue', field: _parent, value: 123}]
-    * Issue.find({_parent$in: [123, ...], (обязательное)teamId: ..., (из доп query)projectId: ...})
-    * */
+
+validators = {
+    issue: [
+        function() {}
+    ]
 };

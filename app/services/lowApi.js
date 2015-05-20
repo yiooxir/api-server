@@ -1,4 +1,3 @@
-var locals = require('./locals');
 var _ = require('underscore');
 var mongoose = require('mongoose');
 var toId = require('../utils').toId;
@@ -98,7 +97,6 @@ LowApi.prototype = {
             callback(null, i);
         }
     }
-
 };
 
 module.exports = new LowApi();
